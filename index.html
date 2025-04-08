@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checking Connection...</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #0f0;
+      font-family: monospace;
+      padding: 2rem;
+    }
+    .log {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>Establishing secure connection...</h2>
+  <div class="log" id="log"></div>
+
+  <script>
+    async function logInfo() {
+      const log = document.getElementById('log');
+
+      function write(text) {
+        log.textContent += text + '\n';
+      }
+
+      write('Fetching client info...');
+      const res = await fetch('https://ipapi.co/json/');
+      const data = await res.json();
+
+      write(`IP Address: ${data.ip}`);
+      write(`City: ${data.city}`);
+      write(`Region: ${data.region}`);
+      write(`Country: ${data.country_name}`);
+      write(`ISP: ${data.org}`);
+      write(`Timezone: ${data.timezone}`);
+      write(`Browser: ${navigator.userAgent}`);
+      write(`Screen Resolution: ${screen.width}x${screen.height}`);
+    }
+
+    logInfo();
+  </script>
+</body>
+</html>
